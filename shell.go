@@ -3,7 +3,7 @@ package shelli
 import (
 	"io"
 
-	"code.google.com/p/go.crypto/ssh"
+	"golang.org/x/crypto/ssh"
 )
 
 // Stream the io.Reader to a channel, passing any errors on the given error channel.
