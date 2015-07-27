@@ -10,7 +10,7 @@ import (
 func streamToChan(stream io.Reader, ch chan<- []byte, errCh chan<- error) {
 	for {
 		buf := make([]byte, 1<<10)
-		n, err := stream.Read(buf[0:])
+		n, err := stream.Read(buf)
 		if n > 0 {
 			ch <- buf[0:n]
 		}
