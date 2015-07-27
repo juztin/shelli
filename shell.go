@@ -60,7 +60,6 @@ func NewPty(client *ssh.Client, inCh <-chan []byte, quit <-chan struct{}) (<-cha
 	go streamToChan(stderr, stderrCh, errCh)
 	// Set terminal modes
 	modes := ssh.TerminalModes{
-		//ssh.ECHO:     0,
 		ssh.VREPRINT: 0,
 		ssh.CS8:      1,
 		ssh.ECHOE:    1,
@@ -68,7 +67,6 @@ func NewPty(client *ssh.Client, inCh <-chan []byte, quit <-chan struct{}) (<-cha
 	}
 	// Request pseudo terminal
 	err = session.RequestPty("xterm", 24, 80, modes)
-	//err = session.RequestPty("xterm", 40, 120, modes)
 	//err = session.RequestPty("vt100", 24, 80, modes)
 	if err != nil {
 		errCh <- err
