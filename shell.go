@@ -8,14 +8,10 @@ import (
 
 // Stream the io.Reader to a channel, passing any errors on the given error channel.
 func streamToChan(stream io.Reader, ch chan<- []byte, errCh chan<- error) {
-	//buf := make([]byte, 1<<10)
 	for {
 		buf := make([]byte, 1<<10)
 		n, err := stream.Read(buf[0:])
 		if n > 0 {
-			/*c := make([]byte, n)
-			copy(c, buf)
-			ch <- c*/
 			ch <- buf[0:n]
 		}
 		if err != nil {
@@ -70,7 +66,8 @@ func NewPty(client *ssh.Client, inCh <-chan []byte, quit <-chan struct{}) (<-cha
 		//ssh.ECHOCTL: 0,
 	}
 	// Request pseudo terminal
-	err = session.RequestPty("xterm", 40, 120, modes)
+	err = session.RequestPty("xterm", 24, 80, modes)
+	//err = session.RequestPty("xterm", 40, 120, modes)
 	//err = session.RequestPty("vt100", 24, 80, modes)
 	if err != nil {
 		errCh <- err
