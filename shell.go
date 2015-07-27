@@ -62,8 +62,9 @@ func NewPty(client *ssh.Client, inCh <-chan []byte, quit <-chan struct{}) (<-cha
 	modes := ssh.TerminalModes{
 		//ssh.ECHO:     0,
 		ssh.VREPRINT: 0,
-		//ssh.CS8:      1,
-		//ssh.ECHOCTL: 0,
+		ssh.CS8:      1,
+		ssh.ECHOE:    1,
+		ssh.ECHOCTL:  0,
 	}
 	// Request pseudo terminal
 	err = session.RequestPty("xterm", 24, 80, modes)
