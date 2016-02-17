@@ -6,6 +6,7 @@ import (
 	"golang.org/x/crypto/ssh"
 )
 
+// ConfigFunc is just a function signature for retrieving ssh configuration functions.
 type ConfigFunc func() (*ssh.ClientConfig, error)
 
 func getKey(file string) (ssh.Signer, error) {
@@ -18,7 +19,7 @@ func getKey(file string) (ssh.Signer, error) {
 	return signer, err
 }
 
-// ConfigForPassword returns a configuration func for the given username and certificate.
+// ConfigForCert returns a configuration func for the given username and certificate.
 func ConfigForCert(user, cert string) ConfigFunc {
 	return func() (*ssh.ClientConfig, error) {
 		key, err := getKey(cert)

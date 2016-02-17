@@ -37,7 +37,7 @@ func sessionStreams(session *ssh.Session) (stdin io.WriteCloser, stdout io.Reade
 	return
 }
 
-// NewShell creates a new SSH session to the client using inCh as stdin, and quiting on a receive to quit.
+// NewPty creates a new SSH session to the client using inCh as stdin, and quiting on a receive to quit.
 // Returns stdout, stderr channels and error channel
 func NewPty(client *ssh.Client, inCh <-chan []byte, quit <-chan struct{}) (<-chan []byte, <-chan []byte, <-chan error) {
 	errCh := make(chan error, 1)
